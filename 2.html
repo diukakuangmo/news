@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <script src="vue.js"></script>
+</head>
+<body>
+
+ <!-- <div id="app">
+        <my-tag my-msg = "123"></my-tag>
+        <tag1 :message = "pMessage"></tag1>
+        <input type="text" v-model = "pMessage">
+    </div>
+    <script>
+        Vue.component("my-tag",{
+            props:["myMsg"],
+            template:"<p>{{ myMsg }}</p>"
+        });
+        Vue.component("tag1",{  //动态prop， 用 v-bind 动态绑定 props 的值到父组件的数据中。每当父组件的数据变化时，该变化也会传导给子组件
+            props:["message"],
+            template:"<p>{{message}}</p>"
+        });
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                pMessage : "6345"
+            }
+        })
+    </script> -->
+    <div id="dd1">
+         <my-tag :mas='mss' @aaa='aa'></my-tag>
+    </div>
+    <script>
+        var yes={
+            template:"<input type='button' value='对'  @click='fun1' v-bind:class='isy' :disabled='kg'>",
+            methods:{
+                fun1:function(){
+                    
+                }
+            },
+            data(){
+                return {
+                    isy:'',
+                    kg:""
+                }
+            }
+        };
+        var no={
+            template:"<input type='button' value='错' @click='fun' :disabled='kg'>",
+            methods:{
+                fun:function(){
+                    
+                },
+            },
+            data(){
+                return {
+                    kg:"",
+                    mss:''
+                }
+            },
+        };
+        var ch={
+            template:"<input type='checkbox' value='123' @click='fun4' v-model='val'>",
+            methods:{
+                fun4:function(val){
+                    this.$emit('click',this.value);
+                    console.log(this.val)
+                }
+            },
+            data(){
+                return {
+                    val:"",
+                }
+            }
+        };
+        Vue.component("my-tag",{
+            template:"<div class='d1'>\
+                      <input type='text' class='t1' @change='fun5' v-model.lazy='name' v-bind:log='loges'><br>\
+                      姓名:<span>{{name}}</span><br>\
+                      <y></y><n></n><ch></ch></div>",
+            components:{
+                "y":yes,
+                "n":no,
+                "ch":ch
+            },
+            props:["mas",'kg'],
+            data(){
+                    return {mss:123,
+                            mss1:false,
+                            mss2:213,
+                            name:'',
+                            loges:""
+                            }
+            },
+            methods:{
+                fun2:function(){
+
+                },
+                fun5:function(){
+                    if(name!=null){
+                        // this.$emit('isopen',this.name);
+                    console.log(this.name)
+                    }
+                    
+                },
+            },
+        })
+        new Vue({
+            el:'#dd1',
+            data:{
+                mss2:"aaa"
+            },
+            props:["mss"],
+            methods:{
+                aa:function(data){
+                    this.mss=data;
+                }
+            }
+        })
+    </script>
+    <style>
+        .isy{
+            border: 1px solid black;
+            background-color: #e8e8e8;
+            opacity: 0.8;
+        }
+        .d1{
+            border: 1px solid black;
+        }
+        .iso{
+            border: 1px solid black;
+            background-color: #8a8a8a;
+            opacity: 0.8;
+        }
+    </style>
+
+</body>
+</html>
